@@ -1,0 +1,39 @@
+name: parallel builds
+
+on:
+  - pull_request
+  - push
+
+jobs:
+  build:
+    name: build
+    runs-on: 'ubuntu-latest'
+    strategy:
+      matrix:
+        target: [chrome, safari]
+
+  build-chrome:
+    if: matrix.target == 'chrome'
+    name: building for chrome
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
+      - name: all okay?
+        run: echo "ok"
+
+  build-safari:
+    if: matrix.target == 'safari'
+    name: building for safari
+    needs: [build]
+    runs-on: macos-11
+    steps:
+      - name: all okay?
+        run: echo "ok"
+
+  finish:
+    name: final step
+    runs-on: ubuntu-latest
+    needs: [build-chrome, build-safari]
+    steps:
+      - name: all okay?
+        run: echo "ok"
