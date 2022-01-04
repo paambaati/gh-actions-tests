@@ -15,12 +15,11 @@ jobs:
     runs-on: 'ubuntu-latest'
     strategy:
       matrix:
-        node-version: ${{fromJson(inputs.targets)}}
+        target: ${{fromJson(inputs.targets)}}
     steps:
       - name: all okay for chrome?
-        if: inputs.target == 'chrome'
+        if: matrix.target == 'chrome'
         run: echo "ok for chrome"
       - name: all okay for safari?
-        if: inputs.target == 'safari'
+        if: matrix.target == 'safari'
         run: echo "ok for safari"
-  
