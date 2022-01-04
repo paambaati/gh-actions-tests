@@ -11,6 +11,9 @@ jobs:
     strategy:
       matrix:
         target: [chrome, safari]
+    steps:
+      - name: do nothing
+        uses: aless10/addChecks-action@v1.1
 
   build-chrome:
     if: matrix.target == 'chrome'
