@@ -11,13 +11,9 @@ jobs:
     strategy:
       matrix:
         target: [chrome, safari]
-    steps:
-      - name: build chrome
-        if: matrix.target == 'chrome'
-        uses: paambaati/gh-actions-tests/.github/workflows/chrome.yml@main
-      - name: build safari
-        if: matrix.target == 'safari'
-        uses: paambaati/gh-actions-tests/.github/workflows/safari.yml@main
+    uses: paambaati/gh-actions-tests/.github/workflows/browser-build.yml@main
+    with:
+      target: ${{ matrix.target}}
 
   finish:
     name: final step
