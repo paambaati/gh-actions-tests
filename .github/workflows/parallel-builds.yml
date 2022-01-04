@@ -7,12 +7,10 @@ on:
 jobs:
   build:
     name: build
-    strategy:
-      matrix:
-        target: [chrome, safari]
     uses: paambaati/gh-actions-tests/.github/workflows/browser-build.yml@main
     with:
-      target: ${{ matrix.target}}
+      targets: >-
+        ["chrome", "safari"]
 
   finish:
     name: final step

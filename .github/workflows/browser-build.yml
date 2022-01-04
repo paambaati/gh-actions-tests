@@ -3,27 +3,24 @@ name: target build
 on:
   workflow_call:
     inputs:
-      target:
-        required: true
-        type: choice
-        description: choose target browser to build the extension for
-        options:
-        - chrome
-        - safari
+      targets:
+        description: 'stringified array of target browsers'
+        default: '["chrome", "safari"]'
+        required: false
+        type: string
 
 jobs:
   build-chrome:
     name: build chrome
     runs-on: 'ubuntu-latest'
-    if: inputs.target == 'chrome'
+    strategy:
+      matrix:
+        node-version: ${{fromJson(inputs.targets)}}
     steps:
       - name: all okay for chrome?
+        if: inputs.target == 'chrome'
         run: echo "ok for chrome"
-  build-safari:
-    name: build safari
-    runs-on: 'macos-11'
-    if: inputs.target == 'safari'
-    steps:
       - name: all okay for safari?
         if: inputs.target == 'safari'
         run: echo "ok for safari"
+  
