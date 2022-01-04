@@ -12,31 +12,17 @@ jobs:
       matrix:
         target: [chrome, safari]
     steps:
-      - name: do nothing
-        uses: aless10/addChecks-action@v1.1
-
-  build-chrome:
-    if: matrix.target == 'chrome'
-    name: building for chrome
-    needs: [build]
-    runs-on: ubuntu-latest
-    steps:
-      - name: all okay?
-        run: echo "ok"
-
-  build-safari:
-    if: matrix.target == 'safari'
-    name: building for safari
-    needs: [build]
-    runs-on: macos-11
-    steps:
-      - name: all okay?
-        run: echo "ok"
+      - name: build chrome
+        if: matrix.target == 'chrome'
+        uses: paambaati/gh-actions-tests/.github/workflows/chrome.yml@main
+      - name: build safari
+        if: matrix.target == 'safari'
+        uses: paambaati/gh-actions-tests/.github/workflows/safari.yml@main
 
   finish:
     name: final step
     runs-on: ubuntu-latest
-    needs: [build-chrome, build-safari]
+    needs: [build]
     steps:
       - name: all okay?
         run: echo "ok"

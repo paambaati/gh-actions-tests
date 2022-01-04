@@ -1,0 +1,12 @@
+name: target build
+
+on:
+  workflow_call:
+
+jobs:
+  build-chrome:
+    name: build safari
+    runs-on: 'macos-11'
+    steps:
+      - name: all okay for safari?
+        run: echo "ok for safari"

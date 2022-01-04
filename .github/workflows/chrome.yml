@@ -1,0 +1,12 @@
+name: target build
+
+on:
+  workflow_call:
+
+jobs:
+  build-chrome:
+    name: build chrome
+    runs-on: 'ubuntu-latest'
+    steps:
+      - name: all okay for chrome?
+        run: echo "ok for chrome"
